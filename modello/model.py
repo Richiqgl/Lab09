@@ -11,11 +11,12 @@ class Model:
 
     def calcolografo(self,distanza):
         self._grafo.add_nodes_from(self._aereoporti)
-        self.voli=set(DAO.getallflights(distanza))
+        self.voli=DAO.getRotte()
         for u in self.voli:
             u_partenza=self._idMap[u.ORIGIN_AIRPORT_ID]
             u_destinazione=self._idMap[u.DESTINATION_AIRPORT_ID]
-            self._grafo.add_edge(u_partenza,u_destinazione,weight=u.DISTANCE)
+            if u.Distanza>distanza:
+                self._grafo.add_edge(u_partenza,u_destinazione,weight=u.Distanza)
         return self._grafo
 
     def getnumNodes(self):

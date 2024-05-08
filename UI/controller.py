@@ -17,7 +17,12 @@ class Controller:
             self._view._txt_result.controls.append(ft.Text("ERRORE MANCA LA DISTANZA", color="red"))
             self._view.update_page()
             return
-        grafo = self._model.calcolografo(self._distanza)
+        try:
+            numero=float(self._distanza)
+        except:
+            self._view._txt_result.controls.append(ft.Text("DEVI INSERIRE NUMERO"))
+            return
+        grafo = self._model.calcolografo(numero)
         self._view._txt_result.controls.append(ft.Text("I VERTICI SONO", color="red"))
         self._view._txt_result.controls.append(ft.Text(self._model.getnumNodes()))
         self._view._txt_result.controls.append(ft.Text("GLI ARCHI  SONO", color="red"))
